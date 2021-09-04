@@ -105,24 +105,13 @@ class AuthProvider extends ChangeNotifier {
   }
 
   login() async {
-    await AuthHelper.authHelper
-        .signin(emailController.text, passwordController.text)
-        .then((value) {
-      if (value) {
-        //todo handle login
-        bool isVerifiedEmail = AuthHelper.authHelper.checkEmailVerification();
-        isVerifiedEmail
-            ? RouteHelper.routeHelper
-                .goToPageWithReplacement(HomePage.routeName)
-            : CustomDialog.customDialog.showCustomDialog(
-                'You have to verify your email, press ok to send another email',
-                sendVericiafion);
-        resetControllers();
-      } else {
-        //todo handel error state
-        CustomDialog.customDialog.showCustomDialog('Falid email or password!');
-      }
-    });
+    UserCredential userCredential = await AuthHelper.authHelper
+        .signin(emailController.text, passwordController.text);
+    FirestoreHelper.firestoreHelper
+        .getUserFromFirestore(userCredential.user.uid);
+    RouteHelper.routeHelper.goToPageWithReplacement(HomePage.routeName);
+
+    resetControllers();
   }
 
   sendVericiafion() {
@@ -133,5 +122,14 @@ class AuthProvider extends ChangeNotifier {
   ResetPassword() async {
     AuthHelper.authHelper.resetPassword(emailController.text);
     resetControllers();
+  }
+
+  checkLogin() {
+    bool isLoggedIn = AuthHelper.authHelper.checkUserLogin();
+    if (isLoggedIn) {
+      RouteHelper.routeHelper.goToPageWithReplacement(HomePage.routeName);
+    } else {
+      RouteHelper.routeHelper.goToPageWithReplacement(LoginPage.routeName);
+    }
   }
 }

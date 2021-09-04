@@ -1,5 +1,6 @@
 import 'package:chat_app/Auth/models/country_model.dart';
 import 'package:chat_app/Auth/models/register_requiest.dart';
+import 'package:chat_app/Auth/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreHelper {
@@ -22,6 +23,16 @@ class FirestoreHelper {
       return CountryModel.fromJson(e.data());
     }).toList();
     return countries;
+  }
+
+  Future<UserModel> getUserFromFirestore(String userId) async {
+    // firebaseFirestore.collection('Users').where('id', isEqualTo: userId).get();
+    DocumentSnapshot documentSnapshot =
+        await firebaseFirestore.collection('Users').doc(userId).get();
+    // CustomDialog.customDialog
+    //     .showCustomDialog(documentSnapshot.data.toString());
+    print(documentSnapshot.data);
+    return UserModel.fromMap(documentSnapshot.data());
   }
 
 /////adding to FireStore

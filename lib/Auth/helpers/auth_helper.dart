@@ -28,19 +28,11 @@ class AuthHelper {
     }
   }
 
-  Future<bool> signin(String email, String password) async {
+  Future<UserCredential> signin(String email, String password) async {
     try {
       UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
-      print(await userCredential.user.getIdToken());
-      print(userCredential.user.uid);
-      if (userCredential.user.uid != null) {
-        print(" userLogin ${userCredential.user.uid}");
-        return true;
-      } else {
-        print(" userLogin ${userCredential.user.uid}");
-        return false;
-      }
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         CustomDialog.customDialog
@@ -51,7 +43,7 @@ class AuthHelper {
             .showCustomDialog('Wrong password provided for that user.');
         // print('Wrong password provided for that user.');
       }
-      return false;
+      //   return false;
     }
   }
 
@@ -81,5 +73,9 @@ class AuthHelper {
   // }
   bool checkEmailVerification() {
     return firebaseAuth.currentUser?.emailVerified ?? false;
+  }
+
+  bool checkUserLogin() {
+    return firebaseAuth.currentUser != null;
   }
 }

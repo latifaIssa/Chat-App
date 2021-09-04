@@ -1,5 +1,6 @@
 import 'package:chat_app/Auth/providers/auth_provider.dart';
 import 'package:chat_app/Auth/ui/pages/login.dart';
+import 'package:chat_app/Auth/ui/pages/splash_screen.dart';
 import 'package:chat_app/chat/pages/home_page.dart';
 import 'package:chat_app/services/routes_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,7 +45,7 @@ class FirebaseConfiguration extends StatelessWidget {
           }
           if (dataSnapShot.connectionState == ConnectionState.done) {
             // return RegisterPage();
-            return LoginPage();
+            return SplashScreen();
           }
           return Scaffold(
             body: Center(
