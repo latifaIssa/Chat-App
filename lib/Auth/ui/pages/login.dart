@@ -5,7 +5,6 @@ import 'package:chat_app/Auth/ui/widgets/background_image.dart';
 import 'package:chat_app/Auth/ui/widgets/custom_gestureDetector.dart';
 import 'package:chat_app/Auth/ui/widgets/custom_textfeild.dart';
 import 'package:chat_app/global_widgets/custom_button.dart';
-import 'package:chat_app/services/routes_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

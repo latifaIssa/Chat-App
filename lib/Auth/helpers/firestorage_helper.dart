@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:chat_app/Auth/models/register_requiest.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageHelper {

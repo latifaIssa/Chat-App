@@ -19,7 +19,7 @@ class ResetPassordPage extends StatelessWidget {
             child: Column(
               children: [
                 CustomrTextFeild('Email', provider.emailController),
-                CustomButton('Reset password', provider.ResetPassword),
+                CustomButton('Reset password', provider.resetPassword),
               ],
             ),
           );

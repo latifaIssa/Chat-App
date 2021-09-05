@@ -35,6 +35,16 @@ class FirestoreHelper {
     return UserModel.fromMap(documentSnapshot.data());
   }
 
+  Future<List<UserModel>> getAllUsersFromFirestore() async {
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await firebaseFirestore.collection('Users').get();
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> docs = querySnapshot.docs;
+    List<UserModel> users =
+        docs.map((e) => UserModel.fromMap(e.data())).toList();
+    print(users.length);
+    return users;
+  }
+
 /////adding to FireStore
   addUserToFirestore(RegisterRequest registerRequest) async {
     try {

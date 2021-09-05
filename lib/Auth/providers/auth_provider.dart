@@ -66,18 +66,18 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-//register and login
   register() async {
     try {
-      if (lastNameController.text == '' || firstNameController.text == '')
-        CustomDialog.customDialog.showCustomDialog(
-            'First name and last name are required, please fill them');
-      else if (file == null)
+      if (file == null)
         CustomDialog.customDialog
-            .showCustomDialog('profile photo is required ');
+            .showCustomDialog('please select profile photo');
+      else if (firstNameController.text == '' || lastNameController.text == '')
+        CustomDialog.customDialog
+            .showCustomDialog('first name and last name are required');
       else {
         UserCredential userCredential = await AuthHelper.authHelper
             .signup(emailController.text, passwordController.text);
+        await AuthHelper.authHelper.verifyEmail();
         String imageUrl =
             await FirebaseStorageHelper.firebaseStorageHelper.uploadImage(file);
         RegisterRequest registerRequest = RegisterRequest(
@@ -90,14 +90,11 @@ class AuthProvider extends ChangeNotifier {
           lName: lastNameController.text,
           imageUrl: imageUrl,
         );
-        await AuthHelper.authHelper.verifyEmail();
-        await AuthHelper.authHelper.logout();
-        await RouteHelper.routeHelper.goToPage(LoginPage.routeName);
         await FirestoreHelper.firestoreHelper
             .addUserToFirestore(registerRequest);
-      }
 
-      // tabController.animateTo(1);
+        await logOut();
+      }
     } on Exception catch (e) {
       print(e);
     }
@@ -119,17 +116,16 @@ class AuthProvider extends ChangeNotifier {
     AuthHelper.authHelper.logout();
   }
 
-  ResetPassword() async {
+  resetPassword() async {
     AuthHelper.authHelper.resetPassword(emailController.text);
     resetControllers();
   }
 
-  checkLogin() {
-    bool isLoggedIn = AuthHelper.authHelper.checkUserLogin();
-    if (isLoggedIn) {
-      RouteHelper.routeHelper.goToPageWithReplacement(HomePage.routeName);
-    } else {
-      RouteHelper.routeHelper.goToPageWithReplacement(LoginPage.routeName);
-    }
+  logOut() async {
+    await AuthHelper.authHelper.logout();
+    resetControllers();
+    firstNameController.clear();
+    lastNameController.clear();
+    RouteHelper.routeHelper.goToPageWithReplacement(LoginPage.routeName);
   }
 }

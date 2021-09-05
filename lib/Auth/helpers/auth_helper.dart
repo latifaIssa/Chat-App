@@ -5,14 +5,18 @@ class AuthHelper {
   AuthHelper._();
   static AuthHelper authHelper = AuthHelper._();
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String getUserId() {
+    return firebaseAuth.currentUser.uid;
+  }
 
-  signup(String email, String password) async {
+  Future<UserCredential> signup(String email, String password) async {
     try {
       //User Credintial: user information to dermine the user
       UserCredential userCredential = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
-      print(await userCredential.user.getIdToken());
-      print(userCredential.user.uid);
+      return userCredential;
+      // print(await userCredential.user.getIdToken());
+      // print(userCredential.user.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         CustomDialog.customDialog
@@ -32,7 +36,12 @@ class AuthHelper {
     try {
       UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
-      return userCredential;
+      if (userCredential.user.uid != null) if (checkEmailVerification())
+        return userCredential;
+      else
+        CustomDialog.customDialog.showCustomDialog(
+            'You have to verify your email, press ok to send another email',
+            verifyEmail);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         CustomDialog.customDialog
@@ -76,6 +85,10 @@ class AuthHelper {
   }
 
   bool checkUserLogin() {
-    return firebaseAuth.currentUser != null;
+    if (firebaseAuth.currentUser == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
