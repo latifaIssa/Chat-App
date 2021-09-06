@@ -1,5 +1,7 @@
 import 'package:chat_app/Auth/providers/auth_provider.dart';
+import 'package:chat_app/chat/pages/Friends_page.dart';
 import 'package:chat_app/chat/widgets/action_bar_button.dart';
+import 'package:chat_app/chat/widgets/user_photo.dart';
 import 'package:chat_app/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +37,7 @@ class _HomePageState extends State<HomePage>
 
     return Consumer<UserProvider>(builder: (context, provider, x) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.grey[300],
           toolbarHeight: height * 0.1,
@@ -68,6 +71,9 @@ class _HomePageState extends State<HomePage>
                         decoration: BoxDecoration(
                           color: Colors.blueGrey,
                           shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.black12,
+                          ),
                           image: DecorationImage(
                             image: NetworkImage(provider.user.imageUrl),
                             fit: BoxFit.fill,
@@ -132,17 +138,13 @@ class _HomePageState extends State<HomePage>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    // first tab bar view widget
-                    Center(
-                      child: Text(
-                        'Friends',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-
+                    // ListView.builder(
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount: provider.users.length,
+                    //     itemBuilder: (context, index) {
+                    //       return UserPhoto(provider.users[index]);
+                    //     }),
+                    FriendsList(),
                     // second tab bar view widget
                     Center(
                       child: Text(

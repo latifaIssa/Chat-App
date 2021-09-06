@@ -12,6 +12,8 @@ class UserProvider extends ChangeNotifier {
   UserModel user;
   String myId;
   List<UserModel> users;
+  List<UserModel> recentUsers;
+
   getUserFromFirebase() async {
     String userId = AuthHelper.authHelper.getUserId();
     user = await FirestoreHelper.firestoreHelper.getUserFromFirestore(userId);
@@ -21,6 +23,7 @@ class UserProvider extends ChangeNotifier {
   getAllUsers() async {
     users = await FirestoreHelper.firestoreHelper.getAllUsersFromFirestore();
     users.removeWhere((e) => e.id == myId);
+    recentUsers.removeWhere((e) => e.id == myId);
     notifyListeners();
   }
 
