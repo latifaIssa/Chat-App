@@ -1,3 +1,4 @@
+import 'package:chat_app/Auth/helpers/auth_helper.dart';
 import 'package:chat_app/Auth/models/country_model.dart';
 import 'package:chat_app/Auth/models/register_requiest.dart';
 import 'package:chat_app/Auth/models/user_model.dart';
@@ -9,9 +10,10 @@ class FirestoreHelper {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   ////getting from Firestore
-  Stream<QuerySnapshot<Map<String, dynamic>>> getFirestoreStream() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getFirestoreStream(
+      String chatId) {
     return firebaseFirestore
-        .collection('Chats')
+        .collection(chatId)
         .orderBy('dateTime') //to sort messages
         .snapshots();
   }
@@ -68,5 +70,11 @@ class FirestoreHelper {
         .collection('Users')
         .doc(userModel.id)
         .update(userModel.toMap());
+  }
+
+  addMessagesToFirestore(Map map, String chatId) async {
+    firebaseFirestore
+        .collection(chatId)
+        .add({...map, 'userId': AuthHelper.authHelper.getUserId()});
   }
 }

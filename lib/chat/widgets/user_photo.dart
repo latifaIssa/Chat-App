@@ -1,4 +1,5 @@
 import 'package:chat_app/Auth/models/user_model.dart';
+import 'package:chat_app/chat/widgets/Circular__image_widget.dart';
 import 'package:flutter/material.dart';
 
 class UserPhoto extends StatelessWidget {
@@ -13,23 +14,7 @@ class UserPhoto extends StatelessWidget {
         children: [
           Expanded(
             flex: 3,
-            child: Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.black12,
-                ),
-                image: DecorationImage(
-                  image: user.imageUrl == null
-                      ? AssetImage('assets/images/defaultProfileImage.png')
-                      : NetworkImage(user.imageUrl),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            child: CircularImageWidget(user.imageUrl),
           ),
           Expanded(
             child: SizedBox(

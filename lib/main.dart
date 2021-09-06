@@ -1,6 +1,8 @@
 import 'package:chat_app/Auth/providers/auth_provider.dart';
 import 'package:chat_app/Auth/ui/pages/login.dart';
 import 'package:chat_app/Auth/ui/pages/splash_screen.dart';
+import 'package:chat_app/chat/pages/chat_page.dart';
+import 'package:chat_app/chat/pages/friend_info_page.dart';
 import 'package:chat_app/chat/pages/home_page.dart';
 import 'package:chat_app/chat/pages/profile_page.dart';
 import 'package:chat_app/chat/pages/update_profile.dart';
@@ -31,6 +33,8 @@ void main() {
         HomePage.routeName: (context) => HomePage(),
         ProfilePage.routeName: (context) => ProfilePage(),
         UpdateProfile.routeName: (context) => UpdateProfile(),
+        ChatPage.routeName: (context) => ChatPage(),
+        FriendInfo.routeName: (context) => FriendInfo(),
       },
       navigatorKey: RouteHelper.routeHelper.navKey,
       home: FirebaseConfiguration(),

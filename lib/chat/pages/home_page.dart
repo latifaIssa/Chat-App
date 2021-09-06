@@ -1,6 +1,7 @@
 import 'package:chat_app/Auth/providers/auth_provider.dart';
 import 'package:chat_app/chat/pages/Friends_page.dart';
 import 'package:chat_app/chat/pages/profile_page.dart';
+import 'package:chat_app/chat/widgets/Circular__image_widget.dart';
 import 'package:chat_app/chat/widgets/action_bar_button.dart';
 import 'package:chat_app/chat/widgets/user_photo.dart';
 import 'package:chat_app/providers/user_provider.dart';
@@ -69,24 +70,7 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Expanded(
                       flex: 2,
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.black12,
-                          ),
-                          image: DecorationImage(
-                            image: provider.user.imageUrl == null
-                                ? AssetImage(
-                                    'assets/images/defaultProfileImage.png')
-                                : NetworkImage(provider.user.imageUrl),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
+                      child: CircularImageWidget(provider.user.imageUrl),
                     ),
                     Expanded(
                         child: Text(
@@ -101,8 +85,9 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             ActionButton(
-                Provider.of<AuthProvider>(context, listen: false).logOut,
-                Icons.logout),
+              Icons.logout,
+              Provider.of<AuthProvider>(context, listen: false).logOut,
+            ),
           ],
         ),
         body: Padding(

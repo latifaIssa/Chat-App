@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ActionButton extends StatelessWidget {
   Function function;
   IconData icon;
-  ActionButton(this.function, this.icon);
+  ActionButton(this.icon, [this.function]);
   @override
   Widget build(BuildContext context) {
     return Container(

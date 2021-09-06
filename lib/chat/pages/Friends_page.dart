@@ -1,5 +1,8 @@
+import 'package:chat_app/chat/pages/chat_page.dart';
+import 'package:chat_app/chat/widgets/Circular__image_widget.dart';
 import 'package:chat_app/chat/widgets/user_photo.dart';
 import 'package:chat_app/providers/user_provider.dart';
+import 'package:chat_app/services/routes_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -74,29 +77,15 @@ class FriendsList extends StatelessWidget {
                       ),
                     ),
                     child: ListTile(
+                      onTap: () {
+                        provider.getRoomId(provider.users[index]);
+                        RouteHelper.routeHelper.goToPage(ChatPage.routeName);
+                      },
                       contentPadding: EdgeInsets.all(10),
                       title: Text(
                           '${provider.users[index].fName} ${provider.users[index].lName}'),
-                      leading: Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black12,
-                          ),
-                          color: Colors.blueGrey,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: provider.user.imageUrl == null
-                                ? AssetImage(
-                                    'assets/images/defaultProfileImage.png')
-                                : NetworkImage(
-                                    provider.users[index].imageUrl,
-                                  ),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
+                      leading:
+                          CircularImageWidget(provider.users[index].imageUrl),
                     ),
                   );
                 }),
