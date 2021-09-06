@@ -1,6 +1,8 @@
 import 'package:chat_app/Auth/providers/auth_provider.dart';
+import 'package:chat_app/chat/pages/update_profile.dart';
 import 'package:chat_app/chat/widgets/item_widget.dart';
 import 'package:chat_app/providers/user_provider.dart';
+import 'package:chat_app/services/routes_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,9 +29,9 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           IconButton(
               onPressed: () {
-                // Provider.of<UserProvider>(context, listen: false)
-                //     .fillControllers();
-                // RouteHelper.routeHelper.goToPage(UpdateProfile.routeName);
+                Provider.of<UserProvider>(context, listen: false)
+                    .fillControllers();
+                RouteHelper.routeHelper.goToPage(UpdateProfile.routeName);
               },
               icon: Icon(Icons.edit)),
           IconButton(
@@ -59,8 +61,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               radius: 70,
                             )
                           : CircleAvatar(
-                              // height: 200,
-                              // width: 200,
                               backgroundColor: Colors.grey,
                               backgroundImage: NetworkImage(
                                 provider.user.imageUrl,

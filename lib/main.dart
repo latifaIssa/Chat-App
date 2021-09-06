@@ -3,6 +3,7 @@ import 'package:chat_app/Auth/ui/pages/login.dart';
 import 'package:chat_app/Auth/ui/pages/splash_screen.dart';
 import 'package:chat_app/chat/pages/home_page.dart';
 import 'package:chat_app/chat/pages/profile_page.dart';
+import 'package:chat_app/chat/pages/update_profile.dart';
 import 'package:chat_app/providers/user_provider.dart';
 import 'package:chat_app/services/routes_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,6 +30,7 @@ void main() {
         ResetPassordPage.routeName: (context) => ResetPassordPage(),
         HomePage.routeName: (context) => HomePage(),
         ProfilePage.routeName: (context) => ProfilePage(),
+        UpdateProfile.routeName: (context) => UpdateProfile(),
       },
       navigatorKey: RouteHelper.routeHelper.navKey,
       home: FirebaseConfiguration(),

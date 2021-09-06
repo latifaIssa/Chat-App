@@ -87,9 +87,12 @@ class FriendsList extends StatelessWidget {
                           color: Colors.blueGrey,
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: NetworkImage(
-                              provider.users[index].imageUrl,
-                            ),
+                            image: provider.user.imageUrl == null
+                                ? AssetImage(
+                                    'assets/images/defaultProfileImage.png')
+                                : NetworkImage(
+                                    provider.users[index].imageUrl,
+                                  ),
                             fit: BoxFit.fill,
                           ),
                         ),

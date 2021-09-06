@@ -61,4 +61,12 @@ class FirestoreHelper {
       print(e);
     }
   }
+
+////update
+  updateProfile(UserModel userModel) async {
+    await firebaseFirestore
+        .collection('Users')
+        .doc(userModel.id)
+        .update(userModel.toMap());
+  }
 }

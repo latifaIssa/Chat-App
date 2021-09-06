@@ -79,7 +79,10 @@ class _HomePageState extends State<HomePage>
                             color: Colors.black12,
                           ),
                           image: DecorationImage(
-                            image: NetworkImage(provider.user.imageUrl),
+                            image: provider.user.imageUrl == null
+                                ? AssetImage(
+                                    'assets/images/defaultProfileImage.png')
+                                : NetworkImage(provider.user.imageUrl),
                             fit: BoxFit.fill,
                           ),
                         ),

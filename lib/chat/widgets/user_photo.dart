@@ -23,7 +23,9 @@ class UserPhoto extends StatelessWidget {
                   color: Colors.black12,
                 ),
                 image: DecorationImage(
-                  image: NetworkImage(user.imageUrl),
+                  image: user.imageUrl == null
+                      ? AssetImage('assets/images/defaultProfileImage.png')
+                      : NetworkImage(user.imageUrl),
                   fit: BoxFit.fill,
                 ),
               ),
