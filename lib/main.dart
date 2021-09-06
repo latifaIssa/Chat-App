@@ -2,6 +2,7 @@ import 'package:chat_app/Auth/providers/auth_provider.dart';
 import 'package:chat_app/Auth/ui/pages/login.dart';
 import 'package:chat_app/Auth/ui/pages/splash_screen.dart';
 import 'package:chat_app/chat/pages/home_page.dart';
+import 'package:chat_app/chat/pages/profile_page.dart';
 import 'package:chat_app/providers/user_provider.dart';
 import 'package:chat_app/services/routes_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,6 +28,7 @@ void main() {
         RegisterPage.routeName: (context) => RegisterPage(),
         ResetPassordPage.routeName: (context) => ResetPassordPage(),
         HomePage.routeName: (context) => HomePage(),
+        ProfilePage.routeName: (context) => ProfilePage(),
       },
       navigatorKey: RouteHelper.routeHelper.navKey,
       home: FirebaseConfiguration(),

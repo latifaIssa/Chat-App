@@ -1,8 +1,10 @@
 import 'package:chat_app/Auth/providers/auth_provider.dart';
 import 'package:chat_app/chat/pages/Friends_page.dart';
+import 'package:chat_app/chat/pages/profile_page.dart';
 import 'package:chat_app/chat/widgets/action_bar_button.dart';
 import 'package:chat_app/chat/widgets/user_photo.dart';
 import 'package:chat_app/providers/user_provider.dart';
+import 'package:chat_app/services/routes_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -60,7 +62,9 @@ class _HomePageState extends State<HomePage>
             ),
             Expanded(
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  RouteHelper.routeHelper.goToPage(ProfilePage.routeName);
+                },
                 child: Column(
                   children: [
                     Expanded(

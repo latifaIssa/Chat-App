@@ -46,6 +46,9 @@ class _ProfilePageState extends State<ProfilePage> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 15,
+                      ),
                       provider.user.imageUrl == null
                           ? CircleAvatar(
                               // height: 200,

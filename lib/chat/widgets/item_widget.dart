@@ -8,11 +8,12 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            label,
+            '$label:',
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
           ),
           Text(
@@ -21,6 +22,7 @@ class ItemWidget extends StatelessWidget {
           ),
         ],
       ),
+      constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width),
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(

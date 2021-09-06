@@ -11,8 +11,8 @@ class UserProvider extends ChangeNotifier {
   AuthProvider provider;
   UserModel user;
   String myId;
-  List<UserModel> users;
-  List<UserModel> recentUsers;
+  List<UserModel> users = [];
+  List<UserModel> recentUsers = [];
 
   getUserFromFirebase() async {
     String userId = AuthHelper.authHelper.getUserId();
